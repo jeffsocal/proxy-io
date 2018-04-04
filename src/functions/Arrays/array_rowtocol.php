@@ -22,7 +22,7 @@ function array_rowtocol($array)
         }
     }
     if (! isset($array_new)) {
-        systemError("Array could not be converted.");
+        systemError("Function::array_rowtocol - Array could not be converted.");
     }
     return $array_new;
 }

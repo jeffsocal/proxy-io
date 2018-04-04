@@ -64,7 +64,7 @@ class Args
 
     public function listVariables()
     {
-        return array_keys($this->array_vars);
+        return $this->array_vars;
     }
 
     private function loadVariables()

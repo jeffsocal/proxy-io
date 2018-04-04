@@ -108,7 +108,7 @@ class Log extends Write
         
         $message = preg_replace("/[\t\n]+/", " ", str_replace("..", "", $primary . ' ' . $secondary));
         
-        $this->currentLogDump .= $info['filename'] . PHP_EOL . $message . PHP_EOL;
+        $this->currentLogDump .= $message . PHP_EOL;
         
         $logMessage .= $logTimeDate;
         $logMessage .= '|' . str_pad($this->pid, 8, " ", STR_PAD_LEFT);

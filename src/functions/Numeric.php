@@ -140,7 +140,7 @@ function randomString($length = 10, $type = 'naAs')
         $chr_A = range('A', 'Z');
     
     if (strstr($type, 's'))
-        $chr_o = str_split('!@#$&');
+        $chr_o = str_split('!@#&');
     
     $chr = array_merge($chr_n, $chr_n, $chr_n, $chr_a, $chr_A, $chr_o, $chr_o, $chr_o);
     $chr = array_merge($chr, $chr);
