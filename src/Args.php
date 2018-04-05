@@ -40,7 +40,7 @@ class Args
             if (is_array($value))
                 return array();
             
-            return null;
+            return $value;
         }
         
         $value_ui = $this->array_vars[$variable];
@@ -54,7 +54,7 @@ class Args
         if (is_null($value_ui))
             return null;
         
-        return str_replace('*', '', $value_ui);
+        return $value_ui;
     }
 
     public function getVar($variable, $value = NULL)
