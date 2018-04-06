@@ -54,7 +54,7 @@ class Args
         if (is_null($value_ui))
             return null;
         
-        return $value_ui;
+        return trim($value_ui);
     }
 
     public function getVar($variable, $value = NULL)
