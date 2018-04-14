@@ -15,7 +15,7 @@ class Args
 
     public function __construct()
     {
-        $this->array_vars = array();
+        $this->array_vars = NULL;
         
         if (key_exists('argv', $_SERVER))
             $this->loadVariables();
@@ -35,24 +35,19 @@ class Args
 
     public function getVariable($variable, $value = NULL)
     {
-        if (! key_exists($variable, $this->array_vars)) {
-            
-            if (is_array($value))
-                return array();
-            
+        if (! key_exists($variable, $this->array_vars))
             return $value;
-        }
         
         $value_ui = $this->array_vars[$variable];
         
-        if (is_array($value)) {
-            $value_ui = array_intersect_key($value, array_flip($value_ui));
-        }
         /*
          * return the string or string array from UI selection
          */
         if (is_null($value_ui))
             return null;
+        
+        if (is_array($value_ui))
+            return $value_ui;
         
         return trim($value_ui);
     }
