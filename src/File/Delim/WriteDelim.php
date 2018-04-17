@@ -22,10 +22,7 @@ class WriteDelim
 
     public function writeCsvFile($file_name, $table_array, $set = 'w')
     {
-        $this->Write->setFileLocationName($file_name);
-        $this->Write->setFileContents($this->tableArrayAsFlat($table_array));
-        $this->Write->setWriteCommand($set);
-        $this->Write->finalWriteFile();
+        $this->Write->writeFile($file_name, $this->tableArrayAsFlat($table_array));
     }
 
     private function tableArrayAsFlat($table_array, $str_character = ",")

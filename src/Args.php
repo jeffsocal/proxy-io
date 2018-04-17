@@ -15,7 +15,7 @@ class Args
 
     public function __construct()
     {
-        $this->array_vars = NULL;
+        $this->array_vars = array();
         
         if (key_exists('argv', $_SERVER))
             $this->loadVariables();
