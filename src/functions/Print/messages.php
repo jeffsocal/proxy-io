@@ -16,18 +16,22 @@ function print_message($variable, $value = null, $sep = ".", $len = 75, $echo = 
     return $out;
 }
 
-function print_var($variable, $web = true)
+function print_var($variable)
 {
-    if (is_true($web))
+    if (! is_cli())
         echo "<br><pre>";
     
     if (is_array($variable)) {
         print_r($variable);
+    } elseif (is_true($variable)) {
+        echo '[' . $variable . '] => TRUE' . PHP_EOL;
+    } elseif (is_false($variable)) {
+        echo '[' . $variable . '] => FALSE' . PHP_EOL;
     } else {
         echo $variable . PHP_EOL;
     }
     
-    if (is_true($web))
+    if (! is_cli())
         echo "</pre>";
 }
 

@@ -55,4 +55,8 @@ function localhostProcess($str = false)
     return $table_new;
 }
 
+function is_cli(){
+    return (php_sapi_name() === 'cli');
+}
+
 ?>
