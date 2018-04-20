@@ -15,6 +15,9 @@ function table_length($table_array)
     if (is_false($table_array))
         return 0;
     
+    if (count($table_array) == 0)
+        return 0;
+    
     $header_array = array();
     foreach ($table_array as $i => $v) {
         $header_array[] = count($v);

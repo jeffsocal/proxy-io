@@ -22,13 +22,14 @@ function print_var($variable)
         echo "<br><pre>";
     
     if (is_array($variable)) {
+        echo count($variable) . " elements:" . PHP_EOL;
         print_r($variable);
     } elseif (is_true($variable)) {
-        echo '[' . $variable . '] => TRUE' . PHP_EOL;
+        echo 'bool: [' . $variable . '] => TRUE' . PHP_EOL;
     } elseif (is_false($variable)) {
-        echo '[' . $variable . '] => FALSE' . PHP_EOL;
+        echo 'bool: [' . $variable . '] => FALSE' . PHP_EOL;
     } else {
-        echo $variable . PHP_EOL;
+        echo 'str:  [' . $variable . ']' . PHP_EOL;
     }
     
     if (! is_cli())
