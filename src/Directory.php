@@ -13,12 +13,14 @@ class Directory
 
     protected $str_path;
 
-    protected $arr_contents;
+    protected $path_files;
+
+    protected $path_folders;
 
     public function __construct($file_path)
     {
         $this->setPath($file_path);
-        $this->listFiles();
+        $this->listObjects();
     }
 
     protected function setPath($string)
@@ -26,30 +28,46 @@ class Directory
         $this->str_path = $string;
     }
 
-    protected function setContents($array)
+    public function getContents($limit = 100, $type = 'file')
     {
-        foreach ($array as $n => $v) {
-            if (preg_match("/^\.+$/", $v))
-                unset($array[$n]);
-        }
-        rsort($array);
-        $this->arr_contents = $array;
+        $this_contents = [];
+        
+        if ($type == 'files')
+            $this_contents = $this->listFiles();
+        
+        if ($type == 'folders')
+            $this_contents = $this->listFolders();
+        
+        return (array_splice($this_contents, 0, $limit));
     }
 
-    public function getContents($limit = 100)
+    public function listFiles()
     {
-        return (array_splice($this->arr_contents, 0, $limit));
+        return $this->path_files;
     }
 
-    protected function listFiles()
+    public function listFolders()
+    {
+        return $this->path_folders;
+    }
+
+    protected function listObjects()
     {
         if (! file_exists($this->str_path)) {
             systemError("File not found for $this->str_path");
         }
         
-        $list_contents = scandir($this->str_path, 1);
-        
-        $this->setContents($list_contents);
+        $list_contents = array_diff(scandir($this->str_path, 1), array(
+            '..',
+            '.'
+        ));
+        foreach ($list_contents as $object) {
+            if (is_dir($this->str_path . $object)) {
+                $this->path_folders[] = $object;
+            } else {
+                $this->path_files[] = $object;
+            }
+        }
     }
 }
 
