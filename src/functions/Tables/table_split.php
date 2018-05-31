@@ -18,6 +18,8 @@ function table_split($table_array, $split_on_column = NULL)
     } else {
         
         $groupby_vals = array_unique($table_array[$split_on_column]);
+        sort($groupby_vals);
+        
     }
     /*
      * if there is only one unique value
