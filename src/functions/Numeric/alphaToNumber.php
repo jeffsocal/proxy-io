@@ -21,4 +21,31 @@ function numberToAlpha($value)
     return ($alpha[$value]);
 }
 
+function numberToAlphaHash($value)
+{
+    $alpha = array_merge(range('a', 'z'), range(0, 9, 1));
+    
+    preg_match_all("/\d{2}/", $value, $matches);
+    
+    $new = '';
+    foreach ($matches[0] as $num) {
+        $new .= $alpha[max(0, preg_replace("/^0*/", "", $num)) % 36];
+    }
+    
+    // $value = max(0, preg_replace("/^0*/", "", $value)) % 26;
+    return ($new);
+}
+
+function base26_encode($value)
+{
+    $b26 = "";
+    $alpha = range('a', 'z');
+    while ($value >= 0) {
+        $b26 = $alpha[$value % 26] . $b26;
+        $value = floor($value / 26) - 1;
+    }
+    return $b26;
+}
+
+
 ?>

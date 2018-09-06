@@ -15,14 +15,20 @@ class WriteDelim
 
     private $Write;
 
+    private $append;
+
     public function __construct()
     {
+        $this->append = FALSE;
         $this->Write = new Write();
     }
 
     public function writeCsvFile($file_name, $table_array, $set = 'w')
     {
-        $this->Write->writeFile($file_name, $this->tableArrayAsFlat($table_array));
+        if ($set != 'w')
+            $this->append = TRUE;
+        
+        $this->Write->writeFile($file_name, $this->tableArrayAsFlat($table_array), $set);
     }
 
     private function tableArrayAsFlat($table_array, $str_character = ",")
@@ -36,7 +42,8 @@ class WriteDelim
         foreach ($content_head as $n => $name) {
             $str_row .= "\"$name\"" . $str_character;
         }
-        $str_table .= rtrim($str_row, $str_character) . "\n";
+        if (is_false($this->append))
+            $str_table .= rtrim($str_row, $str_character) . "\n";
         
         // CONTENTS
         $table_array_length = sizeof($table_array[$content_head[1]]);
