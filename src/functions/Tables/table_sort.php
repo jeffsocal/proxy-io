@@ -20,41 +20,41 @@ function table_sort($table_array, $column, $order = 'ascn', $type = 'string')
         systemError("table_sort cound not find [$column] in the dataSet size=" . sizeof($table_array));
     }
     
-    $TableArrayUseFunction = "array_multisort(";
-    $TableArrayUseFunction .= "\$table_array['$column'],";
-    $table_array_header = table_header($table_array);
+    $arr = $table_array[$column];
     
-    // SORT_ASC, SORT_DESC, SORT_REGULAR, SORT_NUMERIC, SORT_STRING.
+    /*
+     * set the type of ordering
+     */
+    if ($type == 'string') {} elseif ($type == 'number') {} else {
+        systemError("sort type [$type] not recognized");
+    }
+    
+    /*
+     * set the direction of ordering
+     */
     if ($order == 'ascn') {
-        $TableArrayUseFunction .= "SORT_ASC,";
+        if ($type == 'number')
+            asort($arr, SORT_NUMERIC);
+        else
+            asort($arr);
     } elseif ($order == 'desc') {
-        $TableArrayUseFunction .= "SORT_DESC,";
+        if ($type == 'number')
+            arsort($arr, SORT_NUMERIC);
+        else
+            arsort($arr);
     } else {
         systemError("sort order [$order] not recognized");
     }
     
-    if ($type == 'string') {
-        $TableArrayUseFunction .= "SORT_STRING,";
-    } elseif ($type == 'number') {
-        $TableArrayUseFunction .= "SORT_NUMERIC,";
-    } else {
-        systemError("sort type [$type] not recognized");
+    foreach ($table_array as $col => $vals) {
+        
+        // print_r($arr);
+        // print_r($vals);
+        // exit;
+        
+        $new_table_array[$col] = array_values(array_replace($arr, $vals));
     }
     
-    $foundElement = FALSE;
-    foreach ($table_array_header as $table_array_head) {
-        if ($table_array_head == $column)
-            continue;
-        $TableArrayUseFunction .= "\$table_array['$table_array_head'],";
-    }
-    $TableArrayUseFunction = trim($TableArrayUseFunction, ",") . ")";
-    
-    /*
-     * evaluate the sort method
-     */
-    @eval("$TableArrayUseFunction;");
-    
-    //
-    return $table_array;
+    return $new_table_array;
 }
 ?>
