@@ -36,7 +36,7 @@ class Args
     public function getVariable($variable, $value = NULL)
     {
         if (! key_exists($variable, $this->array_vars))
-            return null;
+            return $value;
         
         $value_ui = $this->array_vars[$variable];
         

@@ -118,9 +118,10 @@ class Cli extends Args
         
         $con = file_get_contents($incf[0]);
         
-        if (preg_match("/\sNAME[\s\*\r\n\w\-\.\>\<\'\"\:\,\(\)\=\|\/]+(?=\*\/)/", $con, $man) != FALSE) {
+        if (preg_match("/\sNAME[\s\*\r\n\w\-\.\>\<\'\"\:\,\+\(\)\=\|\/]+(?=\*\/)/", $con, $man) != FALSE) {
             $man[0] = preg_replace("/(?<=\n)\s+\*/", "     ", $man[0]);
             $man[0] = preg_replace("/(?<=\n)\s+(?=[A-Z]{4})/", "\n ", $man[0]);
+            $man[0] = preg_replace("/\-{2}/", "\t", $man[0]);
             echo PHP_EOL . $man[0] . PHP_EOL . PHP_EOL;
         }
         
