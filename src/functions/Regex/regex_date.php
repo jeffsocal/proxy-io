@@ -46,6 +46,11 @@ function regex_date($str)
         return false;
     
     $dates = array_values(array_unique($dates));
+    
+    foreach ($dates as $n => $date) {
+        $dates[$n] = date("Y-m-d", strtotime(preg_replace("/\-+/", "/", $date)));
+    }
+        
     rsort($dates);
     
     return $dates;
