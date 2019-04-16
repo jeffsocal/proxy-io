@@ -51,7 +51,7 @@ class Log extends Write
     //
     protected function getStrTimeStamp()
     {
-        $dt = date("YmdHis");
+        $dt = date("Y.m.d H:i:s");
         $mt = str_pad(preg_replace("/.+\./", "", microtime(true)), 4, 0, STR_PAD_LEFT);
         return $dt . $mt;
     }
