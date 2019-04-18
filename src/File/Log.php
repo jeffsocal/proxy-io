@@ -39,7 +39,7 @@ class Log extends Write
     //
     protected function setLogFileDirectory($dir)
     {
-        $this->logFileDirectory = '../log/' . $dir;
+        $this->logFileDirectory = get_include_path() . '/log/' . $dir;
     }
 
     //
@@ -112,10 +112,7 @@ class Log extends Write
         
         $logMessage .= $logTimeDate;
         $logMessage .= '|' . str_pad($this->pid, 8, " ", STR_PAD_LEFT);
-        
-        if (key_exists('REMOTE_ADDR', $_SERVER))
-            $logMessage .= '|' . str_pad($_SERVER['REMOTE_ADDR'], 16, " ", STR_PAD_LEFT);
-        
+        $logMessage .= '|' . str_pad($this->ipa, 16, " ", STR_PAD_LEFT);
         $logMessage .= '| ' . $message;
         $logMessage .= PHP_EOL;
         
