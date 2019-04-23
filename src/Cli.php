@@ -34,6 +34,14 @@ class Cli extends Args
         $this->msg_line_n = 0;
         $this->msg_line_flushed = false;
     }
+    
+    function getScopeLength(){
+        return $this->msg_scp_len;
+    }
+    
+    function getMessageLength(){
+        return $this->msg_pad_len;
+    }
 
     function setMessageScope(int $length = 100, string $str = "=")
     {
