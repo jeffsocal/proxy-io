@@ -39,7 +39,7 @@ class Log extends Write
     //
     protected function setLogFileDirectory($dir)
     {
-        $this->logFileDirectory = get_include_path() . '/log/' . $dir;
+        $this->logFileDirectory = get_include_path() . 'log/' . $dir;
     }
 
     //
