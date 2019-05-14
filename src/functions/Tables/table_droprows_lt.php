@@ -12,7 +12,7 @@
  */
 function table_droprows_lt($table_array, $column, $lessthan)
 {
-    eval('$func = function ($x) { return $x > ' . $lessthan . '; };');
+    eval('$func = function ($x) { return $x < ' . $lessthan . '; };');
     
     $filtered = array_filter($table_array[$column], $func);
     $keys_toss = array_keys($filtered);

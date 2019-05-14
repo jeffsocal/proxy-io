@@ -43,7 +43,7 @@ class Cli extends Args
         return $this->msg_pad_len;
     }
 
-    function setMessageScope(int $length = 100, string $str = "=")
+    function setMessageScope(int $length = 100, string $str = "-")
     {
         $this->msg_scp_len = $length;
         $this->msg_scp_str = $str;
@@ -88,7 +88,7 @@ class Cli extends Args
 
     function header(string $str, bool $exit = FALSE)
     {
-        $str_left = "=== " . $str . str_repeat($this->msg_scp_str, $this->msg_pad_len);
+        $str_left = "--- " . $str . str_repeat($this->msg_scp_str, $this->msg_pad_len);
         $str_rght = str_repeat($this->msg_scp_str, $this->msg_scp_len);
         echo $this->getString($str_left, $str_rght) . PHP_EOL;
         
