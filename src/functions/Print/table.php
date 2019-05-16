@@ -12,6 +12,11 @@
  */
 function print_table($table_array, $n = 10)
 {
+    echo table_astext($table_array, $n = 10) . PHP_EOL;
+}
+
+function table_astext($table_array, $n = 10)
+{
     /*
      * constants
      */
@@ -78,8 +83,6 @@ function print_table($table_array, $n = 10)
         $tableAsText = preg_replace("/[\,|\t]$/", "", $tableAsText) . PHP_EOL;
     }
     
-    //
-    echo $tableAsText . PHP_EOL;
     return $tableAsText;
 }
 ?>
