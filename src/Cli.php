@@ -34,12 +34,14 @@ class Cli extends Args
         $this->msg_line_n = 0;
         $this->msg_line_flushed = false;
     }
-    
-    function getScopeLength(){
+
+    function getScopeLength()
+    {
         return $this->msg_scp_len;
     }
-    
-    function getMessageLength(){
+
+    function getMessageLength()
+    {
         return $this->msg_pad_len;
     }
 
@@ -108,8 +110,17 @@ class Cli extends Args
         flush();
         $this->msg_line_flushed = TRUE;
         
-        if (is_true($exit))
+        if (is_true($exit)) {
+            echo PHP_EOL;
             exit();
+        }
+    }
+
+    function flusheol(string $var, string $str = "", bool $exit = FALSE)
+    {
+        $this->flush($var, $str, $exit);
+        echo PHP_EOL;
+        $this->msg_line_n ++;
     }
 
     function forceLineCount()

@@ -12,7 +12,7 @@
  */
 function print_table($table_array, $n = 10)
 {
-    echo table_astext($table_array, $n = 10) . PHP_EOL;
+    echo table_astext($table_array, $n) . PHP_EOL;
 }
 
 function table_astext($table_array, $n = 10)
