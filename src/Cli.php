@@ -28,7 +28,6 @@ class Cli extends Args
         parent::__construct();
         $_ENV['PID'] = uniqueId();
         
-        $this->displayHelp();
         $this->setMessagePad(floor($width * .3), $sep);
         $this->setMessageScope($width);
         $this->msg_line_n = 0;

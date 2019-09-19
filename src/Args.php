@@ -13,8 +13,11 @@ class Args
 
     protected $array_vars;
 
+    public $Help;
+
     public function __construct()
     {
+        $this->Help = new Help();
         $this->array_vars = array();
         
         if (key_exists('argv', $_SERVER))
@@ -52,8 +55,15 @@ class Args
         return trim($value_ui);
     }
 
-    public function getVar($variable, $value = NULL)
+    public function getVar($variable, $value = NULL, $desc = NULL)
     {
+        if (is_null($value) or $value == '' or $value == FALSE)
+            $desc .= " [optional]";
+        else
+            $desc .= " [default: " . $value . "]";
+        
+        $this->Help->setVariable($variable, $desc);
+        
         return $this->getVariable($variable, $value);
     }
 
