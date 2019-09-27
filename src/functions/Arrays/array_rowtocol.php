@@ -27,4 +27,8 @@ function array_rowtocol($array)
     return $array_new;
 }
 
+function table_invert(array $array){
+    return array_rowtocol($array);
+}
+
 ?>
