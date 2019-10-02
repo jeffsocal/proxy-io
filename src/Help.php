@@ -35,6 +35,7 @@ class Help
         $this->width = min(80, exec('tput cols'));
         $this->array_vars = [];
         $this->usage = [];
+        $this->example = [];
         $incf = get_included_files();
         $this->basename = basename($incf[0], ".php");
     }
