@@ -136,7 +136,7 @@ class Help
          */
         if (count($this->array_vars) > 0) {
             echo 'OPTIONS' . PHP_EOL;
-            $table = explode(PHP_EOL, table_astext(array_rowtocol($this->array_vars)));
+            $table = explode(PHP_EOL, table_astext(array_rowtocol($this->array_vars), count($this->array_vars)));
             $table = array_map('trim', $table);
             array_splice($table, 0, 2);
             $txt = array_tostring($table, PHP_EOL, '');
