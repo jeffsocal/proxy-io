@@ -27,16 +27,16 @@ class WriteDelim
     {
         if ($set != 'w')
             $this->append = TRUE;
-        
+
         $this->Write->writeFile($file_name, $this->tableArrayAsFlat($table_array), $set);
     }
 
     private function tableArrayAsFlat($table_array, $str_character = ",")
     {
         $content_head = table_header($table_array);
-        
+
         $str_table = "";
-        
+
         // HEADER
         $str_row = '';
         foreach ($content_head as $n => $name) {
@@ -44,17 +44,22 @@ class WriteDelim
         }
         if (is_false($this->append))
             $str_table .= rtrim($str_row, $str_character) . "\n";
-        
+
         // CONTENTS
         $table_array_length = sizeof($table_array[$content_head[1]]);
         $row_names = array_keys($table_array[$content_head[1]]);
         foreach ($row_names as $i) {
             $str_row = '';
-            
+
             foreach ($content_head as $n => $name) {
-                $str_row .= "\"" . $table_array[$name][$i] . "\"" . $str_character;
+
+                $contents = "";
+                if (key_exists($i, $table_array[$name]))
+                    $contents = $table_array[$name][$i];
+
+                $str_row .= "\"" . $contents . "\"" . $str_character;
             }
-            
+
             $str_table .= rtrim($str_row, $str_character) . "\n";
         }
         return $str_table;

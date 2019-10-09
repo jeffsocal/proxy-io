@@ -12,11 +12,14 @@
  */
 function table_droprows_gt($table_array, $column, $greaterthan)
 {
-    $keys_toss = array_keys(array_greaterthan($table_array[$column], $greaterthan));
     
-    foreach ($keys_toss as $key) {
-        $table_array = table_droprow($table_array, $key);
-    }
+    eval('$func = function ($x) { return $x > ' . $greaterthan . '; };');
+    
+    $filtered = array_filter($table_array[$column], $func);
+    $keys_toss = array_keys($filtered);
+    
+    $table_array = table_droprows($table_array, $keys_toss);
+    
     return table_reindex($table_array);
 }
 

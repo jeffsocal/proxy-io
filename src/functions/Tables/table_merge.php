@@ -40,7 +40,7 @@ function table_merge(array $table1, array $table2, string $bycol, string $method
 
         $table1_keys = preg_grep("/$merge_var/", $table1[$bycol]);
         $table2_keys = preg_grep("/$merge_var/", $table2[$bycol]);
-
+        
         $this_t1 = [];
         foreach ($table1_keys as $i => $ee) {
             $row = $array1[$i];
