@@ -23,6 +23,6 @@ function table_length($table_array)
         $header_array[] = count($v);
     }
     
-    return array_sum($header_array) / sizeof($header_array);
+    return array_max($header_array);
 }
 ?>

@@ -31,6 +31,14 @@ class WriteDelim
         $this->Write->writeFile($file_name, $this->tableArrayAsFlat($table_array), $set);
     }
 
+    public function writeTsvFile($file_name, $table_array, $set = 'w')
+    {
+        if ($set != 'w')
+            $this->append = TRUE;
+
+        $this->Write->writeFile($file_name, $this->tableArrayAsFlat($table_array, "\t"), $set);
+    }
+
     private function tableArrayAsFlat($table_array, $str_character = ",")
     {
         $content_head = table_header($table_array);
