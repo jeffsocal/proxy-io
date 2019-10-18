@@ -29,6 +29,7 @@ function table_droprows($table_array, $rows)
     foreach ($table_header as $table_header_name) {
         $table_array[$table_header_name] = array_diff_key($table_array[$table_header_name], $rows);
     }
+    $table_array = table_reindex($table_array);
     return $table_array;
 }
 ?>
