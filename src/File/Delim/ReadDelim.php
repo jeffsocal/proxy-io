@@ -30,14 +30,13 @@ class ReadDelim
     //
     public function __construct($file_path, $skip_lines = 0, $read_n_lines = true)
     {
-        
         $this->table_header = array();
         $this->table_header_n = 0;
         $this->table_array = array();
         $this->str_regex_split = '/.*\n+/';
-        
+
         $this->Read = new Read($file_path);
-        
+
         $this->setRegex($file_path);
         $this->contentsToDataTable($skip_lines, $read_n_lines);
     }
@@ -47,6 +46,10 @@ class ReadDelim
     {
         if (preg_match("/\.csv$/", $file_path)) {
             $this->str_regex_line = '/(?:^|,)(?=[^"]|(")?)"?((?(1)[^"]*|[^,"]*))"?(?=,|$)/';
+        } elseif (preg_match("/\.tsv$/", $file_path)) {
+            $this->str_regex_line = '/(?:^|\t)(?=[^"]|(")?)"?((?(1)[^"]*|[^\t"]*))"?(?=\t|$)/';
+        } elseif (preg_match("/\.ssv$/", $file_path)) {
+            $this->str_regex_line = '/(?:^|\s+)(?=[^"]|(")?)"?((?(1)[^"]*|[^\s+"]*))"?(?=\s+|$)/';
         } else {
             systemError("file type not recognized");
         }
@@ -66,10 +69,10 @@ class ReadDelim
         preg_match_all($this->str_regex_split, $file_contents, $file_data_lines);
         foreach ($file_data_lines[0] as $n => $data_line) {
             preg_match_all($this->str_regex_line, trim($data_line), $data_line_val);
-            
+
             if (sizeof($data_line_val) == 0)
                 continue;
-            
+
             if ($n == $skip_lines) {
                 $this->table_header_n = sizeof($data_line_val[2]);
                 $this->table_header = $data_line_val[2];
@@ -96,7 +99,7 @@ class ReadDelim
             }
         }
     }
-    
+
     /*
      * 'r' Open for reading only; place the file pointer at the beginning of the file.
      * 'r+' Open for reading and writing; place the file pointer at the beginning of the file.

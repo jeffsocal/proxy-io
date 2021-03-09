@@ -12,7 +12,7 @@ function uniqueId()
     for ($x = 0; $x <= 2; $x ++) {
         $str_id .= numberToAlpha(rand(0, 25));
     }
-    return $str_id;
+    return str_shuffle($str_id);
 }
 
 ?>

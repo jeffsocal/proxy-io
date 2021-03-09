@@ -32,12 +32,15 @@ class Help
     public function __construct()
     {
         $this->indent = 10;
-        $this->width = min(80, exec('tput cols'));
+        $this->width = 80;
         $this->array_vars = [];
         $this->usage = [];
         $this->example = [];
         $incf = get_included_files();
         $this->basename = basename($incf[0], ".php");
+
+        if (strstr(php_uname('s'), 'Linux'))
+            $this->width = min($this->width, exec('tput cols'));
     }
 
     public function setVariable($variable, $description)
@@ -92,7 +95,7 @@ class Help
     {
         if (! preg_grep("/^-{1,2}h/", $_SERVER['argv']))
             return NULL;
-        
+
         /*
          * version
          */
@@ -101,13 +104,13 @@ class Help
         $this->indent = max($this->indent, $bnl + 2);
         echo $this->basename . $this->padText($this->version, $this->indent - $bnl);
         echo PHP_EOL;
-        
+
         /*
          * copyright
          */
         echo $this->padText($this->copyright, $this->indent) . PHP_EOL;
         echo PHP_EOL;
-        
+
         /*
          * description
          */
@@ -119,7 +122,7 @@ class Help
                 echo $txt . PHP_EOL;
             }
         }
-        
+
         /*
          * usage
          */
@@ -130,7 +133,7 @@ class Help
             echo $this->padText($txt, $this->indent) . PHP_EOL;
             echo PHP_EOL;
         }
-        
+
         /*
          * variables
          */
@@ -147,7 +150,7 @@ class Help
             echo $txt;
             echo PHP_EOL;
         }
-        
+
         /*
          * example
          */

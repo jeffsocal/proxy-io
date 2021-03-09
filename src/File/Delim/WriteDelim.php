@@ -65,6 +65,8 @@ class WriteDelim
                 if (key_exists($i, $table_array[$name]))
                     $contents = $table_array[$name][$i];
 
+                $contents = str_replace($str_character, " ", $contents);
+
                 $str_row .= "\"" . $contents . "\"" . $str_character;
             }
 
